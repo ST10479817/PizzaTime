@@ -1,0 +1,35 @@
+name: Android CI
+
+on:
+  push:
+    branches:
+      - main  # Runs on push to the main branch
+  pull_request:
+    branches:
+      - main  # Runs on pull request to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Running the action on the latest Ubuntu environment
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  # Checks out the code from the repository
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Install dependencies
+      run: sudo apt-get install android-tools-adb android-tools-fastboot
+
+    - name: Make gradlew executable
+      run: chmod +x ./gradlew  # Makes gradlew executable if it isn't already
+
+    - name: Build the project
+      run: ./gradlew build  # This runs the Gradle build command to build your project
+
+    - name: Run unit tests
+      run: ./gradlew test  # This runs the unit tests in your Android project
