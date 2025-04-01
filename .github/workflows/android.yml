@@ -26,10 +26,11 @@ jobs:
       run: sudo apt-get install android-tools-adb android-tools-fastboot
 
     - name: Make gradlew executable
-      run: chmod +x ./gradlew  # Makes gradlew executable if it isn't already
+      run: chmod +x ./app/gradlew  # Make gradlew executable, if it's inside 'app/'
 
     - name: Build the project
-      run: ./gradlew build  # This runs the Gradle build command to build your project
+      run: ./app/gradlew build  # Build the project using the gradlew in 'app/'
 
     - name: Run unit tests
-      run: ./gradlew test  # This runs the unit tests in your Android project
+      run: ./app/gradlew test  # Run unit tests using the gradlew in 'app/'
+
